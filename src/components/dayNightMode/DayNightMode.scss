@@ -1,0 +1,43 @@
+.toggler {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 20px;
+  border: 2px solid #f9f5f1;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: 0.5s linear;
+
+  &--day {
+    border: 2px solid #555555;
+  }
+
+  &--night {
+    border: 2px solid #f9f5f1;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 19px;
+    height: 18px;
+    border-radius: 50%;
+    transition: 0.5s linear;
+
+    &--day {
+      transform: translateX(0px);
+      background-color: #555555;
+      color: #f9f5f1;
+    }
+
+    &--night {
+      transform: translateX(24px);
+      background-color: #f9f5f1;
+      color: #555555;
+    }
+  }
+}
