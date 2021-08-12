@@ -1,3 +1,5 @@
+@use "./scss-vars/media-queries" as *;
+
 .app {
   position: relative;
   width: 100%;
@@ -9,8 +11,17 @@
   &__main {
     display: flex;
     flex-direction: column;
-    width: 60%;
-    height: 70vh;
-    background-color: orange;
+    justify-content: space-evenly;
+    width: 95%;
+    min-height: 70vh;
+    margin: 50px 0 0 0;
+
+    @include media-queries(medium) {
+      width: 75%;
+    }
+
+    @include media-queries(large) {
+      width: 60%;
+    }
   }
 }
