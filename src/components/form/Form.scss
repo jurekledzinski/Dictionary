@@ -2,26 +2,63 @@
 
 .header {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
+  padding: 0 10px;
   margin-bottom: 10px;
+
+  @include media-queries(medium) {
+    padding: 0 20px;
+  }
+
+  @media (min-width: 580px) {
+    flex-direction: row;
+  }
+
+  &__info-language {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    background-color: #dddddd;
+
+    @media (min-width: 580px) {
+      width: 180px;
+      height: initial;
+    }
+  }
+
+  &__info-text {
+    text-indent: 10px;
+  }
+
+  &__btn-delete-lang {
+    width: 30px;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: orange;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
 }
 
 .form {
   position: relative;
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
+  width: auto;
+  margin-bottom: 10px;
   border-radius: 100vh;
   transition: 0.4s linear;
 
-  @include media-queries(medium) {
-    margin-left: 20px;
+  @media (min-width: 580px) {
+    margin-bottom: initial;
   }
 
   &__input {
-    width: 100%;
-    height: 100%;
+    width: 30px;
+    height: 30px;
     border-radius: 100vh;
     border: 2px solid #dddddd;
     outline: none;
@@ -34,7 +71,35 @@
     color: #dddddd;
 
     &:focus {
-      width: 200px;
+      width: 100%;
+
+      @include media-queries(xsmall) {
+        width: 100%;
+      }
+
+      @include media-queries(small) {
+        width: 100%;
+      }
+
+      @media (min-width: 580px) {
+        width: 200px;
+      }
+    }
+
+    &--not-empty {
+      width: 100%;
+
+      @include media-queries(xsmall) {
+        width: 100%;
+      }
+
+      @include media-queries(small) {
+        width: 100%;
+      }
+
+      @media (min-width: 580px) {
+        width: 200px;
+      }
     }
   }
 
@@ -59,54 +124,86 @@
   }
 
   &:hover > .form__input {
-    width: 100px;
+    width: 100%;
 
     @include media-queries(xsmall) {
-      width: 120px;
+      width: 100%;
     }
 
     @include media-queries(small) {
-      width: 150px;
+      width: 100%;
     }
 
-    @include media-queries(medium) {
+    @media (min-width: 580px) {
       width: 200px;
     }
   }
 
   &:hover > .form__btn-submit {
-    transform: translate(70px, -50%);
+    margin-left: calc(100% - 30px);
     background-color: orange;
     color: white;
     border: 1px solid #dddddd;
 
     @include media-queries(xsmall) {
-      transform: translate(90px, -50%);
+      margin-left: calc(100% - 30px);
     }
 
     @include media-queries(small) {
-      transform: translate(120px, -50%);
+      margin-left: calc(100% - 30px);
     }
 
-    @include media-queries(medium) {
+    @media (min-width: 580px) {
+      margin-left: initial;
       transform: translate(170px, -50%);
     }
   }
 
   &__input:focus + .form__btn-submit {
-    transform: translate(70px, -50%);
+    margin-left: calc(100% - 30px);
     background-color: orange;
 
     @include media-queries(xsmall) {
-      transform: translate(90px, -50%);
+      margin-left: calc(100% - 30px);
     }
 
     @include media-queries(small) {
-      transform: translate(120px, -50%);
+      margin-left: calc(100% - 30px);
     }
 
-    @include media-queries(medium) {
+    @media (min-width: 580px) {
+      margin-left: initial;
       transform: translate(170px, -50%);
     }
+  }
+
+  &__input--not-empty + .form__btn-submit {
+    margin-left: calc(100% - 30px);
+    background-color: orange;
+
+    @include media-queries(xsmall) {
+      margin-left: calc(100% - 30px);
+    }
+
+    @include media-queries(small) {
+      margin-left: calc(100% - 30px);
+    }
+
+    @media (min-width: 580px) {
+      margin-left: initial;
+      transform: translate(170px, -50%);
+    }
+  }
+}
+
+.error-message {
+  margin-bottom: 10px;
+  color: #ff4136;
+  text-align: left;
+  text-indent: 10px;
+  font-weight: 300;
+
+  @include media-queries(medium) {
+    text-indent: 20px;
   }
 }
