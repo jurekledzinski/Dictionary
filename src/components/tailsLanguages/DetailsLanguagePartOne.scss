@@ -1,0 +1,23 @@
+@use "../../scss-vars/media-queries" as *;
+
+.details-language {
+  &__grammar {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &__mode {
+    padding: 3px 10px;
+    margin: 0 4px 4px 0;
+    border: 1px solid orange;
+    background-color: transparent;
+    outline: none;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    &--active {
+      background-color: orange;
+    }
+  }
+}
