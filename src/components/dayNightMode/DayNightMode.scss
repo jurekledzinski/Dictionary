@@ -1,6 +1,8 @@
+@use "../../scss-vars/media-queries" as *;
+
 .toggler {
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: 20px;
   width: 45px;
   height: 20px;
@@ -11,12 +13,16 @@
   align-items: center;
   transition: 0.5s linear;
 
+  @include media-queries(medium) {
+    top: 20px;
+  }
+
   &--day {
-    border: 2px solid #555555;
+    border: 2px solid #809eff;
   }
 
   &--night {
-    border: 2px solid #f9f5f1;
+    border: 2px solid #840170;
   }
 
   &__button {
@@ -27,17 +33,19 @@
     height: 18px;
     border-radius: 50%;
     transition: 0.5s linear;
+    font-size: 1.2rem;
 
     &--day {
-      transform: translateX(0px);
-      background-color: #555555;
+      transform: translateX(-1px);
+      background-color: #809eff;
       color: #f9f5f1;
+      color: #ffdc00;
     }
 
     &--night {
       transform: translateX(24px);
-      background-color: #f9f5f1;
-      color: #555555;
+      background-color: #840170;
+      color: #c7c7c7;
     }
   }
 }
