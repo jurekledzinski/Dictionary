@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import "./DayNightMode.scss";
 
+import { StoreContext } from "../../store/StoreProvider";
+
 const DayNightMode = () => {
-  const [flagToggle, setFlagToggle] = useState(false);
+  const { flagToggle, setFlagToggle } = useContext(StoreContext);
 
   const handleToggleDayNight = () => {
     setFlagToggle((prevValue) => !prevValue);
