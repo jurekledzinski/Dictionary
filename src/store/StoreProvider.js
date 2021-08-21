@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const StoreContext = createContext(null);
 
@@ -10,6 +10,33 @@ const StoreProvider = ({ children }) => {
   const [idLang, setIdLang] = useState(null);
   const [isActive, setIsActive] = useState(true);
   const [numIndex, setNumIndex] = useState(null);
+  const [isOnline, setIsOnline] = useState(true);
+
+  const updateStatus = () => {
+    if (navigator.onLine) {
+      setIsOnline(true);
+    } else {
+      setIsOnline(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("online", updateStatus);
+    window.addEventListener("offline", updateStatus);
+
+    return () => {
+      window.removeEventListener("online", updateStatus);
+      window.removeEventListener("offline", updateStatus);
+    };
+  }, [navigator.onLine]);
+
+  useEffect(() => {
+    if (navigator.onLine) {
+      setIsOnline(true);
+    } else {
+      setIsOnline(false);
+    }
+  }, []);
 
   return (
     <StoreContext.Provider
@@ -28,6 +55,8 @@ const StoreProvider = ({ children }) => {
         setIsActive,
         numIndex,
         setNumIndex,
+        isOnline,
+        setIsOnline,
       }}
     >
       {children}
