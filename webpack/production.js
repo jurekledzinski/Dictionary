@@ -3,6 +3,8 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const LinkTypePlugin =
   require("html-webpack-link-type-plugin").HtmlWebpackLinkTypePlugin;
+const { InjectManifest } = require("workbox-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -60,7 +62,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpg|png|svg|gif|jpeg)$/,
+        test: /\.(jpg|png|svg|gif|jpeg)?$/,
         type: "asset/resource",
       },
     ],
@@ -72,6 +74,21 @@ module.exports = {
     }),
     new LinkTypePlugin({
       "**/*.css": "text/css",
+    }),
+    new InjectManifest({
+      swSrc: "./src/sw.js",
+      swDest: "sw.js",
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "./public/favicon-16x16.png", to: "" },
+        { from: "./public/favicon-32x32.png", to: "" },
+        { from: "./public/logo192.png", to: "" },
+        { from: "./public/logo256.png", to: "" },
+        { from: "./public/logo384.png", to: "" },
+        { from: "./public/logo512.png", to: "" },
+        { from: "./public/maskable.png", to: "" },
+      ],
     }),
   ],
 };

@@ -8,7 +8,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "../", "build"),
     filename: "js/[contenthash:6].js",
-    assetModuleFilename: "img/[name][contenthash:6].[ext]",
     clean: true,
   },
   resolve: {
@@ -38,7 +37,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "..", "public", "index.html"),
       filename: "./index.html",
-      favicon: "./public/images/favicon.png",
       minify: {
         collapseWhitespace: true,
         removeComments: true,
