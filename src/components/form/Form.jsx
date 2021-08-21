@@ -19,7 +19,10 @@ const Form = () => {
     setCodeLanguage,
     setChooseLanguage,
     setDataLanguage,
+    setIsActive,
     setIdLang,
+    setNumIndex,
+    isOnline,
   } = useContext(StoreContext);
   const [errorMsg, setErrMessage] = useState("");
   const [isEmpty, setIsEmpty] = useState(true);
@@ -27,8 +30,33 @@ const Form = () => {
 
   let idTimeout = useRef(null);
 
-  const handleSubmitSearch = (e) => {
+  async function getCachedData(cacheName, url) {
+    const cacheStorage = await caches.open(cacheName);
+    const cachedResponse = await cacheStorage.match(url);
+
+    if (!cachedResponse || !cachedResponse.ok) {
+      return false;
+    }
+
+    return await cachedResponse.json();
+  }
+
+  const checkCacheStorage = async (url) => {
+    let nameCache = "language-api-response";
+
+    let cachedData = await getCachedData(nameCache, url);
+
+    let isInCache =
+      typeof cachedData === "boolean"
+        ? cachedData
+        : cachedData.find((item) => item.word.toLowerCase() === textSearch);
+    return isInCache;
+  };
+
+  const handleSubmitSearch = async (e) => {
     e.preventDefault();
+
+    let urlApi = `https://api.dictionaryapi.dev/api/v2/entries/${codeLanguage}/${textSearch}`;
 
     if (Boolean(dataLanguage[0]) && dataLanguage[0].word === textSearch) {
       setErrMessage("You already find word in this language");
@@ -45,7 +73,14 @@ const Form = () => {
       return;
     }
 
-    let urlApi = `https://api.dictionaryapi.dev/api/v2/entries/${codeLanguage}/${textSearch}`;
+    if ("caches" in window) {
+      let isInCacheWord = await checkCacheStorage(urlApi);
+
+      if (!Boolean(isInCacheWord) && !isOnline) {
+        setErrMessage("Your are offline");
+        return;
+      }
+    }
 
     fetch(urlApi)
       .then((response) => {
@@ -57,9 +92,15 @@ const Form = () => {
       })
       .then((data) => {
         setDataLanguage(data);
+        setIsActive(true);
+        setNumIndex(null);
       })
       .catch((err) => {
-        setErrMessage(err.message);
+        if (isOnline) {
+          setErrMessage(err.message);
+        } else {
+          setErrMessage("Your are offline");
+        }
       });
   };
 
@@ -76,8 +117,10 @@ const Form = () => {
   const handleClearLanguage = () => {
     setCodeLanguage(null);
     setChooseLanguage(null);
+    setIsActive(true);
     setIdLang(null);
     setIsEmpty(true);
+    setNumIndex(null);
     setTextSearch("");
     setDataLanguage([]);
   };
