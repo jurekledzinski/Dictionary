@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ReactDOM from "react-dom";
+import registerServiceWorker from "./serviceWorkerRegister";
 
 import "./index.scss";
 
@@ -29,3 +30,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+registerServiceWorker();
