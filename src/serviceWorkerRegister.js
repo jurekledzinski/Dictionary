@@ -1,10 +1,6 @@
 import { Workbox } from "workbox-window";
 
 export default function registerServiceWorker() {
-  if ("production" !== process.env.NODE_ENV) {
-    return;
-  }
-
   if ("serviceWorker" in navigator) {
     const wb = new Workbox("sw.js");
 
