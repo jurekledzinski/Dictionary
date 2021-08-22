@@ -49,16 +49,24 @@ const Form = () => {
     let isInCache =
       typeof cachedData === "boolean"
         ? cachedData
-        : cachedData.find((item) => item.word.toLowerCase() === textSearch);
+        : cachedData.find(
+            (item) =>
+              item.word.toLowerCase() === textSearch.toLowerCase().trim()
+          );
     return isInCache;
   };
 
   const handleSubmitSearch = async (e) => {
     e.preventDefault();
 
-    let urlApi = `https://api.dictionaryapi.dev/api/v2/entries/${codeLanguage}/${textSearch}`;
+    let urlApi = `https://api.dictionaryapi.dev/api/v2/entries/${codeLanguage}/${textSearch
+      .toLowerCase()
+      .trim()}`;
 
-    if (Boolean(dataLanguage[0]) && dataLanguage[0].word === textSearch) {
+    if (
+      Boolean(dataLanguage[0]) &&
+      dataLanguage[0].word.toLowerCase() === textSearch.toLowerCase().trim()
+    ) {
       setErrMessage("You already find word in this language");
       return;
     }
