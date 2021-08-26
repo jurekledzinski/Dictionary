@@ -1,3 +1,5 @@
+# ![WebApp](https://github.com/jurekledzinski/Dictionary/blob/media/images/Simple%20Dictionary.jpg?raw=true)
+
 # Simple Dictionary
 
 Small application where you can choose the word in given language and see its meaning, pronunciation (only english), definitions.
