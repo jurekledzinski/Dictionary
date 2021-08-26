@@ -59,7 +59,7 @@ const Form = () => {
   const handleSubmitSearch = async (e) => {
     e.preventDefault();
 
-    let urlApi = `https://api.dictionaryapi.dev/api/v2/entries/${codeLanguage}/${textSearch
+    let urlApi = `${process.env.API_KEY}${codeLanguage}/${textSearch
       .toLowerCase()
       .trim()}`;
 
