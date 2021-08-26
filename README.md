@@ -33,10 +33,10 @@ npm install in root folder
 ### Run application
 
 ```sh
-npm run build - create build version
-npm run dev - run locally
 npm run serve - run locally build version
 ```
+
+Service worker is adjusted to work only on production to avoid caching in development phase, npm run serve will create build folder and run it.
 
 #### See live
 
