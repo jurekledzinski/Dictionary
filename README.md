@@ -36,7 +36,7 @@ npm install in root folder
 npm run serve - run locally build version
 ```
 
-Service worker is adjusted to work only on production to avoid caching in development phase, npm run serve will create build folder and run it.
+Service workers are adjusted to work only on production to avoid caching in development phase, npm run serve will create build folder and run it.
 
 #### See live
 
@@ -44,4 +44,4 @@ Service worker is adjusted to work only on production to avoid caching in develo
 
 ## License
 
-MIT
+MIT © [Jurek Ledziński](https://github.com/jurekledzinski)
